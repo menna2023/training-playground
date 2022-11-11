@@ -3,12 +3,12 @@ pipeline {
 		docker { 
 			image 'alpine:latest' 
 		}
-	}
+	}	
     stages {
         stage('build') {
             steps {
                 script {
-                	def buildConfigs = readJSON text: '{ name : "menna"}'
+                	def buildConfigs = readJSON text: '[{ name : "menna"}, {name : "shaimaa"}]'
                 	buildConfigs.each{ buildConfig ->
                 		sh "echo '$buildConfig.name' "
 					}
