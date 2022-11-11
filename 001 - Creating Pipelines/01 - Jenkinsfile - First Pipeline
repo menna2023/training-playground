@@ -1,3 +1,7 @@
+def WriteToFile (text= '') {
+   sh "date > $test && cat $text"
+}   
+     
 pipeline {
     agent { 
 		docker { 
@@ -7,7 +11,10 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sh 'cat /etc/alpine-release'
+	       WriteToFile('file.tx')
+	       sh 'sleep 10s'
+	       WriteToFile('file.txt')
+               sh 'cat /etc/alpine-release'
             }
         }
     }
