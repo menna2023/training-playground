@@ -1,3 +1,7 @@
+import jenkins.model.*
+jenkins = Jenkins.instance
+
+
 def WriteToFile (text= '') {
    sh "date > $test && cat $text"
 }   
