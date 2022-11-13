@@ -1,22 +1,30 @@
-def WriteToFile (text= '') {
-   sh "date > $test && cat $text"
-}   
-     
 pipeline {
-    agent { 
-		docker { 
-			image 'alpine:latest' 
-		}
-	}
-    stages {
-        stage("build") {
-            steps {
-	       WriteToFile('file.txt')
-	       sh 'sleep 10s'
-	       WriteToFile('file.txt')
-               sh 'sleep 10s'
-	       WriteToFile('file.txt')
-            }
-        }
+  agent {
+    docker {
+      image 'alpine:latest'
     }
-}
+  } 
+  stages {
+    stage ('input the name') { 
+      input {
+        message "Name?"
+      parameters {
+        string(name:'NAME')
+	}
+    steps {
+            echo "$NAME"
+    }	    
+    }
+     stage('ask for age') {
+     input{
+           message "Age?"
+	parameters { 
+	  string(name:'AGE')
+	  }
+      }
+      steps {
+        echo "$AGE"
+      }
+     }
+  }
+  }
