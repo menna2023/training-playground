@@ -8,7 +8,7 @@ pipeline {
     stage ('input the name') { 
       input {
         message "Name?"
-      parameters {
+        parameters {
            string(name:'NAME')
 	}
    }	
