@@ -9,8 +9,9 @@ pipeline {
       input {
         message "Name?"
       parameters {
-        string(name:'NAME')
+           string(name:'NAME')
 	}
+   }	
     steps {
             echo "$NAME"
     }	    
