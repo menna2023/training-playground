@@ -1,31 +1,19 @@
+List<String> CHOICES = [];
 pipeline {
-  agent {
-    docker {
-      image 'alpine:latest'
-    }
-  } 
-  stages {
-    stage ('input the name') { 
-      input {
-        message "Name?"
-        parameters {
-           string(name:'NAME')
-	}
-   }	
-    steps {
-            echo "$NAME"
-    }	    
-    }
-     stage('ask for age') {
-     input{
-           message "Age?"
-	parameters { 
-	  string(name:'AGE')
-	  }
-      }
-      steps {
-        echo "$AGE"
-      }
-     }
-  }
-  }
+    agent any
+stages {
+        stage('User Input') {
+
+
+            steps {
+
+                script {
+                        CHOICES = ["tag1", "tag2", "tag3"];    
+                        env.YourTag = input  message: 'What are we deploying today?',ok : 'Deploy',id :'tag_id',
+                                        parameters:[choice(choices: CHOICES, description: 'Select a tag for this build', name: 'TAG')]
+                        }           
+                echo "Deploying ${env.YourTag}. Have a nice day."
+            }
+        }
+}
+}
