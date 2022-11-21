@@ -1,16 +1,11 @@
-pipeline {
-     agent any
-     
-     stages {
-       stage ('build') {
+pipeline { 
+         agent any
+        stages{
+         stage ('build') {
             steps {
-               echo 'building'
-               }
-               }
-       stage ('deploy') {
-          steps {
-              echo 'deploy'
-                }
-                }
+                   sh 'make'
+                   archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+                   }
+                   }
  }
- }             
+ }        
