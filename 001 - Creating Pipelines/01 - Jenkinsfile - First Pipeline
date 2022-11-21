@@ -1,16 +1,16 @@
 pipeline {
-    agent any
-stages {
-        stage('build') {
-
+     agent any
+     
+     stages {
+       stage ('build') {
             steps {
-
-                script {
-           def response = httpRequest 'http://localhost:8080/jenkins/api/json?pretty=true'
-           println("Status: "+response.status)
-           println("Content: "+response.content)
-            }
-        }
-}
-}
-}
+               echo 'building'
+               }
+               }
+       stage ('deploy') {
+          steps {
+              echo 'deploy'
+                }
+                }
+ }
+ }             
